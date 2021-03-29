@@ -7,22 +7,25 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>TIC TAC TOE</h1>
-    <div>
-        <p>Enter player 1 name below</p>
-        <input type="text" id="playerOne" >
-        <p>Enter player 2 name below</p>
-        <input type="text" id="playerTwo" >
+    <audio id="musicFile" src="mary.mp3" loop></audio>
+    <h1 class="ticTacToe">TIC TAC TOE</h1>
+    <div class="enterDetails">
+        <p class="playerOnep">Enter player 1 name below</p>
+        <input type="text" id="playerOne"  class="nameInputOne">
+        <p class="playertwop" >Enter player 2 name below</p>
+        <input type="text" id="playerTwo" class="nameInputTwo">
+        <div id="errorInput"></div>
     </div>
-    <button onclick="enterGame()">Enter</button>
+    <button onclick="enterGame()" class="enterButton">Enter</button>
+    <div id="game">
+        <div class="scoreBoard">Score Board
+            <div id="scoreBoardOne"></div>
+            <div id="scoreBoardTwo"></div>
+       </div>
     <center>
-        <div id="game">
-            <div class="scoreBoard">Score Board
-                <div id="scoreBoardOne"></div>
-                <div id="scoreBoardTwo"></div>
-            </div>
+        <div id="winner" class="winnerDiv"></div>
             
-    <table border="1" width="400px" height="400px">
+    <table  width="320px"  class="tab">
         <tr>
             <td>
                <input type="button" class="disab" onclick="clickMe(event),win()" value="" id="one">
@@ -57,17 +60,19 @@
               </td>
         </tr>
     </table>
-    <button onclick="conti()">Continue</button>
-    <button onclick="restar()">Restart</button>
+    <button onclick="conti()" class="continueButton">Continue</button>
+    <button onclick="restar()" class="restartButton">Restart</button>
+    
    
 </div>
 <br>
-    <div id="winner"></div>
+   
 </center>
 
 
 
 <script>
+    playMusic()
     v = 0
     pOneScore = 0
     pTwoScore = 0
@@ -198,9 +203,16 @@ function disab(){
 
 
 function enterGame(){
+    if(playerOne.value !=="" && playerTwo.value !==""){
     document.getElementById("game").style.display = "block";
     scoreBoardOne.innerHTML= playerOne.value + ":" + pOneScore
     scoreBoardTwo.innerHTML= playerTwo.value + ":" + pTwoScore
+    errorInput.innerHTML=""
+    }
+    else{
+        errorInput.innerHTML="Kindly Fill in Names!!!"
+    }
+    
 }
 function conti(){
          document.getElementById("one").disabled = false
@@ -226,6 +238,10 @@ function conti(){
 }
 function restar(){
     location.reload();
+}
+
+function playMusic(){
+    musicFile.play()
 }
 </script>
 </body>
